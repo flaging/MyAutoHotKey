@@ -28,6 +28,7 @@
 ;
 ;_______________________________________________
 ;-----------------------------------------------
+global tmp:=1
 SwitchIME(dwLayout){
 ;该函数设定输入法为英语
     HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
@@ -58,6 +59,23 @@ sleep, 500
 send {Ctrl Down}{Shift}
 return
 
+Flag:=false  
+CapsLock & r::  
+if(Flag:=!Flag ){  
+    ToolTip 命令模式,400,0  
+}else{  
+    ToolTip 编辑模式,400,0 ;按键功能不变  
+}  
+return  
+  
+;命令模式  
+#if Flag  
+j::click wheeldown  
+k::click wheelup  
+u::send ^u  
+d::send ^d  
+s::send ^s  
+#if  
 
 
 
@@ -123,9 +141,6 @@ return
 !Enter::
 click
 return
-
-!p::SendInput,{Fn}{F1}
-
 
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/

@@ -23,12 +23,11 @@
 ;alt+
 ;win+滚轮 切换虚拟桌面
 ;{space+b 备份文件到备份盘}
-;
+;CapsLock & r 切换到编辑模式或者控制模式，使用jk实现滑轮上升或者下降
 ;
 ;
 ;_______________________________________________
 ;-----------------------------------------------
-global tmp:=1
 SwitchIME(dwLayout){
 ;该函数设定输入法为英语
     HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)

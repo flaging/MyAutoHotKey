@@ -61,12 +61,22 @@ return
 Flag:=false  
 CapsLock & r::  
 if(Flag:=!Flag ){  
-    ToolTip 命令模式,400,0  
+    ToolTip 命令模式,400,0
+    SetTimer, RemoveToolTip, 5000  
 }else{  
-    ToolTip 编辑模式,400,0 ;按键功能不变  
+    ToolTip 编辑模式,400,0 ;按键功能不变 
+    SetTimer, RemoveToolTip, 5000 
 }  
 return  
-  
+
+
+
+
+RemoveToolTip:
+SetTimer, RemoveToolTip, Off
+ToolTip
+return
+
 ;命令模式  
 #if Flag  
 j::click wheeldown  

@@ -59,7 +59,7 @@ send {Ctrl Down}{Shift}
 return
 
 Flag:=false  
-CapsLock & r::  
+! & Esc::  
 if(Flag:=!Flag ){  
     ToolTip 命令模式,400,0
     SetTimer, RemoveToolTip, 5000  

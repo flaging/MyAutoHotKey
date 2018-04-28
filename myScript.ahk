@@ -34,32 +34,27 @@ SwitchIME(dwLayout){
     ControlGetFocus,ctl,A
     SendMessage,0x50,0,HKL,%ctl%,A
 }
-
-!6::  
-Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
+FlagAllHotKeys = false
+CapsLock & Tab::
+FlagAllHotKeys:=!FlagAllHotKeys
 return
 
-!4::  
-Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
-return
+!6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
 
-;!b::  
-;Run C:\Program Files\MATLAB\R2016b\bin\matlab,C:\Users\Lee\Desktop\
-;return
+!4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
+
 !b::run C:\Portable\BatchRun.ffs_batch
 
-!c::
-return
 
 !r::
-SwitchIME(0x04090409)
+;SwitchIME(0x04090409)
 Run cmd /c taskkill /f /im explorer.exe & start explorer
 sleep, 500
-send {Ctrl Down}{Shift}
+SendInput {Ctrl Down}{Shift}
 return
 
 Flag:=false  
-CapsLock & Esc::  
+CapsLock & r::  
 if(Flag:=!Flag ){  
     ToolTip 命令模式,400,0
     SetTimer, RemoveToolTip, 5000  
@@ -79,8 +74,8 @@ return
 
 ;命令模式  
 #if Flag  
-j::click wheeldown  
-k::click wheelup  
+j::click WheelDown  
+k::click WheelUp  
 u::send ^u  
 d::send ^d  
 s::send ^s  
@@ -88,19 +83,16 @@ s::send ^s
 
 
 
-!e::
-run C:\Program Files\Everything\Everything
-return
+!e::run C:\Program Files\Everything\Everything
 
-!.::
-click wheeldown
-return
-!,::
-click wheelup
-return
+!.::click wheeldown
+
+!,::click wheelup
+
 
 !d::
 d =  %A_YYYY%%A_MM%%A_DD%
+
 ;获得系统时间比如今天的日期：2011-09-16
 Send %d%
 return
@@ -127,8 +119,7 @@ return
 ; #按 Alt + ↓ 关闭虚拟桌面
 !Left:: Send #^{Left}
 ; #按 Alt + ← 切换到左侧虚拟桌面
-!Right:: Send #^{Right}
-; #按 Alt + → 切换到右侧虚拟桌面
+!Right:: Send #^{Right}; #按 Alt + → 切换到右侧虚拟桌面
 
 ;!Up::
 ;MouseMove,0,-20,0,R
@@ -150,7 +141,7 @@ return
 !Enter::
 click
 return
-
+#If FlagAllHotKeys
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/
 Space & b::Run https://www.baidu.com/baidu?wd=%clipboard%
@@ -159,5 +150,6 @@ Space & s::Run http://shouqu.me/my.html
 Space & x::Run https://www.zhihu.com/
 Space & d::Run http://www.dlut.edu.cn/
 Space & g::Run https://github.com/
+#If
 
 

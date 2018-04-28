@@ -28,38 +28,31 @@
 ;
 ;_______________________________________________
 ;-----------------------------------------------
-SwitchIME(dwLayout){
-;该函数设定输入法为英语
-    HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
-    ControlGetFocus,ctl,A
-    SendMessage,0x50,0,HKL,%ctl%,A
-}
+
 FlagAllHotKeys = false
 CapsLock & Tab::
 FlagAllHotKeys:=!FlagAllHotKeys
 return
 
-!6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
-
-!4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
-
-!b::run C:\Portable\BatchRun.ffs_batch
 
 
-!r::
-;SwitchIME(0x04090409)
+
+
+
+restartExplore()
+{
 Run cmd /c taskkill /f /im explorer.exe & start explorer
 sleep, 500
 SendInput {Ctrl Down}{Shift}
-return
+}
 
 Flag:=false  
-CapsLock & r::  
+CapsLock & 1::  
 if(Flag:=!Flag ){  
-    ToolTip 命令模式,400,0
+    ToolTip 命令模式,0,0
     SetTimer, RemoveToolTip, 5000  
 }else{  
-    ToolTip 编辑模式,400,0 ;按键功能不变 
+    ToolTip 编辑模式,0,0 ;按键功能不变 
     SetTimer, RemoveToolTip, 5000 
 }  
 return  
@@ -79,69 +72,26 @@ k::click WheelUp
 u::send ^u  
 d::send ^d  
 s::send ^s  
-#if  
-
-
-
-!e::run C:\Program Files\Everything\Everything
-
-!.::click wheeldown
-
-!,::click wheelup
-
-
-!d::
-d =  %A_YYYY%%A_MM%%A_DD%
-
-;获得系统时间比如今天的日期：2011-09-16
-Send %d%
-return
-
-!t::
-d = %A_Hour%:%A_Min%:%A_Sec%
-;获得系统时间比如今天的时间：18:30:33。
-Send %d%
-return
-
-!WheelUp::
-send ^#{Left}
-sleep ,200
-return
-
-!WheelDown::
-send ^#{Right}
-sleep ,200
-return
-
-!Up:: Send #^{d}
-; #按 Alt + ↑ 新建虚拟桌面
-!Down:: Send #^{F4}
-; #按 Alt + ↓ 关闭虚拟桌面
-!Left:: Send #^{Left}
-; #按 Alt + ← 切换到左侧虚拟桌面
-!Right:: Send #^{Right}; #按 Alt + → 切换到右侧虚拟桌面
-
-;!Up::
-;MouseMove,0,-20,0,R
-; 按 Alt →　切换到右侧虚拟桌面；　按　Ａｌｔ　← 切换到左侧虚拟桌面
-;return
-
-;!Down::
-;MouseMove,0,20,0,R
-;return
-
-;!Left::
-;MouseMove,-20,0,0,R
-;return
-
-;!Right::
-;MouseMove,20,0,,R
-;return
-
-!Enter::
-click
-return
+#if 
+ 
 #If FlagAllHotKeys
+!r::restartExplore()
+!Enter::click
+!e::run C:\Program Files\Everything\Everything
+!.::click wheeldown
+!,::click wheelup
+!d::Send %A_YYYY%%A_MM%%A_DD% ;获得系统时间比如今天的日期：2011-09-16
+!t::Send %A_Hour%:%A_Min%:%A_Sec% ;获得系统时间比如今天的时间：18:30:33。
+!WheelUp::send ^#{Left}
+!WheelDown::send ^#{Right}
+!Up:: Send #^{d} ; #按 Alt + ↑ 新建虚拟桌面
+!Down:: Send #^{F4} ; #按 Alt + ↓ 关闭虚拟桌面
+!Left:: Send #^{Left} ; #按 Alt + ← 切换到左侧虚拟桌面
+!Right:: Send #^{Right}  ; #按 Alt + → 切换到右侧虚拟桌面
+!6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
+!4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
+!b::run C:\Portable\BatchRun.ffs_batch
+
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/
 Space & b::Run https://www.baidu.com/baidu?wd=%clipboard%

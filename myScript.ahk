@@ -1,44 +1,40 @@
-﻿;myScript.ahk
-;________________________________________________
-;------------------------------------------------
-;使用说明
-;alt+n打开notepad++
-;alt+c
-;alt+r运行重启管理器
-;space+z打开知网
-;alt+e打开everything
-;alt+. 向上
-;alt+, 向下
-;alt+f2 打开mathtype
-;alt+4 打开matlab2014a
-;alt+6 打开matlab2016a
-;alt+b 打开matlab2016b
-;
-;alt+Up/Down/Left/Right 鼠标上、下、左、右移
-;alt+
-;alt+
-;alt+
-;alt+
-;alt+
-;alt+
-;win+滚轮 切换虚拟桌面
-;{space+b 备份文件到备份盘}
-;CapsLock & r 切换到编辑模式或者控制模式，使用jk实现滑轮上升或者下降
-;
-;
-;_______________________________________________
-;-----------------------------------------------
+﻿v:="1.0.1"
+If !A_IsAdmin
+{
+    Try 
+    {
+        Run *RunAs, "%A_ScriptFullPath%",/restart  
+    }
+    ExitApp
+}
+ToolTip 版本：%v%,100,0
+SetTimer, RemoveToolTip, 5000
+;MsgBox, 0x40, 脚本启动, 版本：%v%, 2
+EnableHotKeysFlag = false
 
-FlagAllHotKeys = false
-CapsLock & Tab::
-FlagAllHotKeys:=!FlagAllHotKeys
-return
+CapsLock & Tab::Reload
+;FlagAllHotKeys:=!FlagAllHotKeys
 
+CapsLock & 1::
+    Flag:=!Flag
+    if Flag=1
+    {  
+    ToolTip 命令模式,0,0
+    SetTimer, RemoveToolTip, 5000
+    }
+    return
+
+CapsLock & 2::
+    Flag:=!Flag
+    if Flag=0
+    {  
+    ToolTip 编辑模式,0,0
+    SetTimer, RemoveToolTip, 5000
+    }
+    return
 
 
-
-
-
+;functions
 restartExplore()
 {
 Run cmd /c taskkill /f /im explorer.exe & start explorer
@@ -46,24 +42,18 @@ sleep, 500
 SendInput {Ctrl Down}{Shift}
 }
 
-Flag:=false  
-CapsLock & 1::  
-if(Flag:=!Flag ){  
-    ToolTip 命令模式,0,0
-    SetTimer, RemoveToolTip, 5000  
-}else{  
-    ToolTip 编辑模式,0,0 ;按键功能不变 
-    SetTimer, RemoveToolTip, 5000 
-}  
-return  
-
-
-
-
 RemoveToolTip:
 SetTimer, RemoveToolTip, Off
 ToolTip
 return
+
+Flag:=false  
+ 
+
+
+
+
+
 
 ;命令模式  
 #if Flag  
@@ -74,7 +64,7 @@ d::send ^d
 s::send ^s  
 #if 
  
-#If FlagAllHotKeys
+#If EnableHotKeysFlag
 !r::restartExplore()
 !Enter::click
 !e::run C:\Program Files\Everything\Everything

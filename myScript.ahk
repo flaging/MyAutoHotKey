@@ -85,7 +85,7 @@ s::send ^s
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/
 Space & b::Run https://www.baidu.com/baidu?wd=%clipboard%
-Space & t::Run http://www.iciba.com/%clipboard%
+Space & t::Run http://dict.youdao.com/w/eng/%clipboard%
 Space & w::Run https://weibo.com/
 Space & s::Run http://shouqu.me/my.html
 Space & x::Run https://www.zhihu.com/

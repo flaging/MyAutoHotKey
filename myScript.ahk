@@ -11,6 +11,7 @@ ToolTip 版本：%v%,100,0
 SetTimer, RemoveToolTip, 5000
 ;MsgBox, 0x40, 脚本启动, 版本：%v%, 2
 EnableHotKeysFlag = True
+AppEnableFlag = False
 
 CapsLock & Tab::Reload
 ;FlagAllHotKeys:=!FlagAllHotKeys
@@ -29,6 +30,15 @@ CapsLock & 2::
     if Flag=0
     {  
     ToolTip 编辑模式,0,0
+    SetTimer, RemoveToolTip, 5000
+    }
+    return
+
+CapsLock & 3::
+    AppEnableFlag:= !AppEnableFlag
+    if AppEnableFlag=1
+    {  
+    ToolTip App模式,0,0
     SetTimer, RemoveToolTip, 5000
     }
     return
@@ -80,10 +90,8 @@ s::send ^s
 !Right:: Send #^{Right}  ; #按 Alt + → 切换到右侧虚拟桌面
 !6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
 !4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
-!b::run C:\Portable\BatchRun.ffs_batch
-m::SendInput m
-m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
-m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
+!b::run C:\Portable\BatchRun.fSSSfs_batch
+
 
 
 Space::SendInput,{Space}
@@ -95,6 +103,11 @@ Space & s::Run http://shouqu.me/my.html
 Space & x::Run https://www.zhihu.com/
 Space & d::Run http://www.dlut.edu.cn/
 Space & g::Run https://github.com/
+#If
+
+#If, AppEnableFlag
+m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
+m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
 #If
 
 

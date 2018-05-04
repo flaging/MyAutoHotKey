@@ -1,5 +1,5 @@
 ﻿v:="1.0.1"
-If !A_IsAdmin
+While, !A_IsAdmin
 {
     Try 
     {
@@ -10,7 +10,7 @@ If !A_IsAdmin
 ToolTip 版本：%v%,100,0
 SetTimer, RemoveToolTip, 5000
 ;MsgBox, 0x40, 脚本启动, 版本：%v%, 2
-EnableHotKeysFlag = false
+EnableHotKeysFlag = True
 
 CapsLock & Tab::Reload
 ;FlagAllHotKeys:=!FlagAllHotKeys
@@ -81,6 +81,9 @@ s::send ^s
 !6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
 !4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
 !b::run C:\Portable\BatchRun.ffs_batch
+m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
+m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
+
 
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/

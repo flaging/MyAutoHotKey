@@ -96,7 +96,7 @@ s::send ^s
 
 Space::SendInput,{Space}
 Space & z::Run http://www.cnki.net/
-Space & b::Run https://www.baidu.com/
+Space & b::Run https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=monline_4_dg&wd=%clipboard%
 Space & t::Run http://dict.youdao.com/w/eng/%clipboard%
 Space & w::Run https://weibo.com/
 Space & s::Run http://shouqu.me/my.html
@@ -105,9 +105,10 @@ Space & d::Run http://www.dlut.edu.cn/
 Space & g::Run https://github.com/
 #If
 
-#If, AppEnableFlag
-m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
-m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
-#If
+;#If, AppEnableFlag
+;m::m
+;m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
+;m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
+;#If
 
 

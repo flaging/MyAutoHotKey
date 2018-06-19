@@ -1,12 +1,12 @@
 ﻿v:="1.0.1"
-While, !A_IsAdmin
-{
-    Try 
-    {
-        Run *RunAs, "%A_ScriptFullPath%",/restart  
-    }
-    ExitApp
-}
+;While, !A_IsAdmin
+;{
+;    Try 
+;    {
+;       Run *RunAs, "%A_ScriptFullPath%",/restart  
+;   }
+;    ExitApp
+;}
 ToolTip 版本：%v%,100,0
 SetTimer, RemoveToolTip, 5000
 ;MsgBox, 0x40, 脚本启动, 版本：%v%, 2
@@ -91,6 +91,7 @@ s::send ^s
 !6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
 !4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
 !b::run C:\Portable\BatchRun.fSSSfs_batch
+!7::Run C:\Program Files\MATLAB\R2016b\bin\matlab,C:\Users\Lee\Desktop\
 
 
 

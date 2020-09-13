@@ -45,6 +45,11 @@ CapsLock & 3::
 
 
 ;functions
+SendText(var_string){
+;      local
+      SendInput {text}%var_string%
+      return
+  }
 restartExplore()
 {
 Run cmd /c taskkill /f /im explorer.exe & start explorer
@@ -76,7 +81,7 @@ s::send ^s
  
 #If EnableHotKeysFlag
 !r::restartExplore()
-!Enter::click
+#!Enter::click
 !e::run C:\Program Files\Everything\Everything
 !.::click wheeldown
 !,::click wheelup
@@ -89,21 +94,37 @@ s::send ^s
 !Left:: Send #^{Left} ; #按 Alt + ← 切换到左侧虚拟桌面
 !Right:: Send #^{Right}  ; #按 Alt + → 切换到右侧虚拟桌面
 !6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
-!4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
-!b::run C:\Portable\BatchRun.fSSSfs_batch
-!7::Run C:\Program Files\MATLAB\R2016b\bin\matlab,C:\Users\Lee\Desktop\
+!4::Run D:\Program Files (x86)\MATLAB\R2014a\bin\matlab,C:\Users\Lee\Desktop\
+!b::run C:\Portable\BatchRun.ffs_batch
+!7::Run C:\Program Files\MATLAB\R2016b\bin\matlab,D:\Users\Lee\Desktop\
+!8::Run C:\Program Files\MATLAB\R2018a\bin\matlab,C:\Users\Lee\Desktop\
+; #e::
+; run "C:\Program Files\totalcmd\TOTALCMD.EXE" 
+;  sleep, 1000      
+; IfWinExist, ahk_class TNASTYNAGSCREEN                 
+; {                 
+;     WinGetText, Content, ahk_class TNASTYNAGSCREEN ;获取未注册提示窗口文本信息                 
+;     StringMid, Num, Content, 10, 1 ;获取随机数字                 
+;     ControlSend,, %Num%, ahk_class TNASTYNAGSCREEN ;将随机数字发送到未注册提示窗口                 
+; }                 
+; sleep, 250
+; return 
 
 
 
-Space::SendInput,{Space}
-Space & z::Run http://www.cnki.net/
-Space & b::Run https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=monline_4_dg&wd=%clipboard%
-Space & t::Run http://dict.youdao.com/w/eng/%clipboard%
-Space & w::Run https://weibo.com/
-Space & s::Run http://shouqu.me/my.html
-Space & x::Run https://www.zhihu.com/
-Space & d::Run http://www.dlut.edu.cn/
-Space & g::Run https://github.com/
+Tab::SendInput,{Tab}
+Tab & z::Run http://www.cnki.net/
+Tab & b::Run https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=monline_4_dg&wd=%clipboard%
+Tab & t::Run http://dict.youdao.com/w/eng/%clipboard%
+Tab & w::Run https://weibo.com/
+Tab & s::Run http://shouqu.me/my.html
+Tab & x::Run https://www.zhihu.com/
+Tab & d::Run http://www.dlut.edu.cn/
+Tab & g::Run https://github.com/
+Tab & q::
+SendText("lyp@9409")
+Send {Enter}
+return
 #If
 
 ;#If, AppEnableFlag
@@ -111,5 +132,20 @@ Space & g::Run https://github.com/
 ;m & 6::Run C:\Program Files\MATLAB\R2016a\bin\matlab,C:\Users\Lee\Desktop\
 ;m & 4::Run C:\Program Files (x86)\MATLAB\R2014a32\bin\matlab,C:\Users\Lee\Desktop\
 ;#If
+
+;Alt+X 调出
+!X::
+;获取当前日期时间并保存到剪贴板
+d = @Lee %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec%
+clipboard = %d%
+;打开文本文档
+Run C:\Users\Lee\Desktop\Update.txt
+;打开需要一定时间，所以停顿一下
+sleep,1000
+;复制当前日期时间
+Send ^v
+;换行
+Send {Enter}
+Return
 
 
